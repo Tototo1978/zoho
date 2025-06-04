@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Lead</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, textarea, select { width: 300px; }
+  </style>
+</head>
+<body>
+  <h1>Simulación de Lead Zoho CRM</h1>
+  <form id="leadForm">
+    <fieldset>
+      <legend>Encabezado</legend>
+      <label>
+        Nombre del lead
+        <input type="text" name="nombreLead" required>
+      </label>
+      <label>
+        Gestión Manual
+        <input type="checkbox" name="gestionManual">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Datos de usuario</legend>
+      <label>
+        Contacto (ID)
+        <input type="text" name="contactoId">
+      </label>
+      <label>
+        Nombre
+        <input type="text" name="nombre" required>
+      </label>
+      <label>
+        Apellidos
+        <input type="text" name="apellidos">
+      </label>
+      <label>
+        Dirección
+        <textarea name="direccion"></textarea>
+      </label>
+      <label>
+        Correo electrónico
+        <input type="email" name="correoElectronico" required>
+      </label>
+      <label>
+        Móvil
+        <input type="tel" name="movil">
+      </label>
+      <label>
+        Teléfono
+        <input type="tel" name="telefono">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Comercial</legend>
+      <label>
+        Comercial (ID)
+        <input type="text" name="comercialId" required>
+      </label>
+      <label>
+        Equipo de ventas
+        <input type="text" name="equipoVentasId">
+      </label>
+      <label>
+        Unidad de operación
+        <input type="text" name="unidadOperacion" value="Euroinnova S.L.">
+      </label>
+      <label>
+        Estado
+        <select name="estado">
+          <option value="Nuevo">Nuevo</option>
+          <option value="Contactado">Contactado</option>
+          <option value="Calificado">Calificado</option>
+          <option value="Descalificado">Descalificado</option>
+        </select>
+      </label>
+      <label>
+        Calificación (0-100)
+        <input type="number" name="calificacion" min="0" max="100" value="0">
+      </label>
+      <label>
+        Prioridad (1-5)
+        <input type="number" name="prioridad" min="1" max="5" value="3">
+      </label>
+      <label>
+        Etiquetas (separar por comas)
+        <input type="text" name="etiquetas">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Programa</legend>
+      <label>
+        Programa (ID)
+        <input type="text" name="programaId">
+      </label>
+      <label>
+        Titulación
+        <input type="text" name="titulo" readonly>
+      </label>
+      <label>
+        Especialidad
+        <input type="text" name="especialidad" readonly>
+      </label>
+      <label>
+        Modalidad
+        <input type="text" name="modalidad" readonly>
+      </label>
+      <label>
+        Convocatoria Cerem
+        <input type="text" name="convocatoriaCerem" readonly>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Marketing</legend>
+      <label>
+        UTM Campaña
+        <input type="text" name="utmCampana">
+      </label>
+      <label>
+        UTM Medio
+        <input type="text" name="utmMedio">
+      </label>
+      <label>
+        UTM Fuente
+        <input type="text" name="utmFuente">
+      </label>
+      <label>
+        gclid
+        <input type="text" name="gclid">
+      </label>
+      <label>
+        fbclid
+        <input type="text" name="fbclid">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Notas internas</legend>
+      <textarea name="notas" rows="4" cols="50"></textarea>
+    </fieldset>
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <pre id="output"></pre>
+
+  <script>
+    const form = document.getElementById('leadForm');
+    const output = document.getElementById('output');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.gestionManual = form.gestionManual.checked;
+      output.textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>
